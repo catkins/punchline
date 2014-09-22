@@ -21,7 +21,7 @@ module Mindy
     def enqueue(options = {})
       priority = options.fetch :priority
       value    = options.fetch :value
-      @enqueue.call([key], [priority, value])
+      @enqueue.call([key], [priority, value]) == 1
     end
 
     def dequeue

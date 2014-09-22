@@ -2,25 +2,62 @@
 
 # Mindy
 
-Mindy is a Redis backed minimum priority queue
+Mindy is a Redis backed Minimum Priority Queue with enforced uniqueness and atomicity fuelled by lua scripts.
 
-## Pre-requisites
+## Motivation
 
-- Redis
+At Doceo, we needed a way to atomically keep track of dirty records that needed reprocessing, whilst also avoiding doing extra work if records are marked as dirty and haven't been processed yet.
+
+## Prerequisites
+
+- Redis 2.6+
+
+Currently against Ruby 2.0.0, 2.1.0 and JRuby
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'mindy', github: 'catkins/mindy'
+```ruby
+gem 'mindy', github: 'catkins/mindy'
+```
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
+
+## Usage
+
+```ruby
+require 'mindy'
+
+# optionally override Mindy a Redis client, otherwise defaults to Redis.new
+Mindy.config.redis = Redis.new host: "10.0.1.1", port: 6830
+
+# create a queue
+queue = Mindy::MinQueue.new
+queue.length # => 0
+
+# add a key
+queue.enqueue priority: Time.now.to_i, value: 'hello!' # => true
+queue.length # => 1
+
+# shortly after... higher priority score is rejected
+queue.enqueue priority: Time.now.to_i, value: 'hello!' # => false
+queue.length # => 1
+
+# original key is retrieved
+queue.dequeue # => { :priority => 1411405014, :value => "hello!" }
+
+# queue is now epty
+queue.length # => 0
+
+```
 
 ## TODO
 
-- Finish basic queue operations
 - Add support for Redis::Namespace
 - Come up with a gem name that isn't taken...
 - Push to rubygems

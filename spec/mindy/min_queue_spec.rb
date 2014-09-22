@@ -67,6 +67,17 @@ module Mindy
         }.by 1
       end
 
+      it 'returns true when key is written' do
+        result = subject.enqueue priority: 123, value: 'hello'
+        expect(result).to eq true
+      end
+
+      it 'returns false when key is not written' do
+        result = subject.enqueue priority: 123, value: 'hello'
+        result = subject.enqueue priority: 456, value: 'hello'
+        expect(result).to eq false
+      end
+
       describe 'duplicates' do
         it 'ignores duplicate values' do
           subject.enqueue priority: 123, value: 'hello'
