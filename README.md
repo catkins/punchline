@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/catkins/mindy.svg)](https://travis-ci.org/catkins/mindy) [![Dependency Status](https://gemnasium.com/catkins/mindy.svg)](https://gemnasium.com/catkins/mindy)
+[![Build Status](https://travis-ci.org/catkins/mindy.svg)](https://travis-ci.org/catkins/mindy) [![Dependency Status](https://gemnasium.com/catkins/mindy.svg)](https://gemnasium.com/catkins/mindy) [![Coverage Status](https://img.shields.io/coveralls/catkins/mindy.svg)](https://coveralls.io/r/catkins/mindy)
 
 # Mindy
 
