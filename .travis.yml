@@ -1,6 +1,7 @@
 language: ruby
 cache: bundler
-
+services:
+  - redis-server
 rvm:
   - jruby
   - 2.0.0
