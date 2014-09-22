@@ -18,7 +18,9 @@ module Mindy
       redis.zcard key
     end
 
-    def enqueue(priority: Time.now.to_i, value: '')
+    def enqueue(options = {})
+      priority = options.fetch :priority
+      value    = options.fetch :value
       @enqueue.call([key], [priority, value])
     end
 
