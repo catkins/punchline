@@ -1,9 +1,11 @@
+require 'redis'
+
 module Mindy
-  class Configuration < Struct.new(:redis)
-    class << self
-      def redis
-        super || @redis ||= Redis.new
-      end
+  class Configuration
+    attr_accessor :redis
+
+    def initialize(redis = nil)
+      @redis = redis || Redis.new
     end
   end
 end
