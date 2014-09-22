@@ -19,7 +19,7 @@ module Mindy
     end
 
     def enqueue(priority: Time.now.to_i, value: '')
-      @enqueue.call [key], [priority, value]
+      @enqueue.call([key], [priority, value])
     end
 
     def dequeue

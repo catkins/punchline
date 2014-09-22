@@ -31,18 +31,22 @@ module Mindy
     end
 
     describe '#length' do
-
-      let(:mock_redis) { double 'redis', zcard: 5 }
-      before(:each) { subject.config.redis = mock_redis }
-
       it { should respond_to :length }
 
+      let(:mock_redis) { double 'redis', zcard: 5 }
+
+      it 'is initially zero' do
+        expect(subject.length).to eq 0
+      end
+
       it 'checks the cardinality of sorted set in redis' do
+        subject.config.redis = mock_redis
         expect(mock_redis).to receive(:zcard).with(some_key)
         subject.length
       end
 
       it 'returns the length of the sorted set' do
+        subject.config.redis = mock_redis
         expect(subject.length).to eq 5
       end
     end
@@ -61,6 +65,27 @@ module Mindy
         }.to change {
           subject.length
         }.by 1
+      end
+
+      describe 'duplicates' do
+        it 'ignores duplicate values' do
+          subject.enqueue priority: 123, value: 'hello'
+
+          expect {
+            subject.enqueue priority: 567, value: 'hello'
+          }.to change {
+            subject.length
+          }.by(0)
+        end
+
+        it 'retains only the lowest priority score' do
+          subject.enqueue priority: 123, value: 'hello'
+          subject.enqueue priority: 567, value: 'hello'
+          subject.enqueue priority: 789, value: 'hello'
+
+          pair = subject.dequeue
+          expect(pair[:priority]).to eq 123
+        end
       end
     end
 
