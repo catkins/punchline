@@ -12,7 +12,7 @@ At Doceo, we needed a way to atomically keep track of dirty records that needed 
 
 - Redis 2.6+
 
-Currently against Ruby 2.0.0, 2.1.0 and JRuby
+Currently tested against Ruby 2.0.0, 2.1.0 and JRuby
 
 ## Installation
 
