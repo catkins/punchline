@@ -1,28 +1,33 @@
+[![Build Status](https://travis-ci.org/catkins/mindy.svg)](https://travis-ci.org/catkins/mindy) [![Dependency Status](https://gemnasium.com/catkins/mindy.svg)](https://gemnasium.com/catkins/mindy)
+
 # Mindy
 
-TODO: Write a gem description
+Mindy is a Redis backed minimum priority queue
+
+## Pre-requisites
+
+- Redis
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'mindy'
+    gem 'mindy', github: 'catkins/mindy'
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
+## TODO
 
-    $ gem install mindy
-
-## Usage
-
-TODO: Write usage instructions here
+- Finish basic queue operations
+- Add support for Redis::Namespace
+- Come up with a gem name that isn't taken...
+- Push to rubygems
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/mindy/fork )
+1. Fork it ( http://github.com/catkins/mindy/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
