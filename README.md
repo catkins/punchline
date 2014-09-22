@@ -51,7 +51,7 @@ queue.length # => 1
 # original key is retrieved
 queue.dequeue # => { :priority => 1411405014, :value => "hello!" }
 
-# queue is now epty
+# queue is now empty
 queue.length # => 0
 
 ```
