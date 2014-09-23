@@ -2,13 +2,18 @@ require 'spec_helper'
 
 module Punchline
   describe MinQueue do
+    TEST_KEY = 'punchline:test:queue'
 
-    let(:some_key) { 'some:key' }
+    def clear_queue!
+      Redis.new.del TEST_KEY
+    end
+
+    before(:all) { clear_queue! }
+    after(:each) { clear_queue! }
+
+    let(:some_key) { TEST_KEY }
     subject(:min_queue) { MinQueue.new some_key }
 
-    before(:each) do
-      subject.clear!
-    end
 
     it { should_not be_nil }
     it { should respond_to :config }
@@ -37,7 +42,7 @@ module Punchline
     describe '#length' do
       it { should respond_to :length }
 
-      let(:mock_redis) { double 'redis', zcard: 5 }
+      let(:mock_redis) { double 'redis', zcard: 5, del: true }
 
       it 'is initially zero' do
         expect(subject.length).to eq 0
@@ -59,8 +64,8 @@ module Punchline
       it { should respond_to :all }
 
       it 'delegates to reading redis range' do
-        subject.redis.stub(:zrange) { [] }
         expect(subject.redis).to receive(:zrange).with(some_key, 0, -1, with_scores: true)
+                                                 .and_return([])
         subject.all
       end
 
