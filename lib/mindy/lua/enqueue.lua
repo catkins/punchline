@@ -17,4 +17,3 @@ if priority < current_score then
 end
 
 return false
-
