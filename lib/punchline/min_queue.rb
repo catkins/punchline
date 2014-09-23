@@ -25,7 +25,7 @@ module Punchline
     end
 
     def enqueue(options = {})
-      priority = options.fetch :priority
+      priority = options[:priority] || Time.now.to_i
       value    = options.fetch :value
       @enqueue.call([key], [priority, value]) == 1
     end

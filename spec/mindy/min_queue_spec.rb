@@ -9,7 +9,10 @@ module Punchline
     end
 
     before(:all) { clear_queue! }
-    after(:each) { clear_queue! }
+    after(:each) do
+      subject.reset_scripts!
+      clear_queue!
+    end
 
     let(:some_key) { TEST_KEY }
     subject(:min_queue) { MinQueue.new some_key }
@@ -42,7 +45,7 @@ module Punchline
     describe '#length' do
       it { should respond_to :length }
 
-      let(:mock_redis) { double 'redis', zcard: 5, del: true }
+      let(:mock_redis) { double 'redis', zcard: 5, del: true, script: true }
 
       it 'is initially zero' do
         expect(subject.length).to eq 0
@@ -84,15 +87,11 @@ module Punchline
     end
 
     describe '#enqueue' do
-      after(:each) do
-        subject.reset_scripts!
-      end
-
       it { should respond_to :enqueue }
 
       it 'increases the length by 1' do
         expect {
-          subject.enqueue priority: 123, value: 'hello'
+          subject.enqueue value: 'hello'
         }.to change {
           subject.length
         }.by 1
@@ -123,20 +122,33 @@ module Punchline
         it 'retains only the lowest priority score' do
           subject.enqueue priority: 123, value: 'hello'
           subject.enqueue priority: 567, value: 'hello'
-          subject.enqueue priority: 789, value: 'hello'
+          subject.enqueue priority: 25, value: 'hello'
 
           pair = subject.dequeue
-          expect(pair[:priority]).to eq 123
+          expect(pair[:priority]).to eq 25
+        end
+      end
+
+      describe 'sequential inserts' do
+        before(:each) { Timecop.freeze }
+
+        it 'keeps the oldest value for a given key' do
+          original_time = Time.now.to_i
+          subject.enqueue value: 'hello'
+
+          Timecop.travel Time.now + 1000
+          subject.enqueue value: 'hello'
+
+          Timecop.travel Time.now + 1000
+          subject.enqueue value: 'hello'
+
+          result = subject.dequeue
+          expect(result[:priority]).to eq original_time
         end
       end
     end
 
     describe '#dequeue' do
-      after(:each) do
-        subject.reset_scripts!
-        subject.clear!
-      end
-
       it { should respond_to :dequeue }
 
       it 'decreases the length by 1' do
