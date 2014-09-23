@@ -43,12 +43,12 @@ queue = Punchline::MinQueue.new
 queue.length # => 0
 
 # add a key
-queue.enqueue value: 'hello!' # => true
+queue.enqueue 'hello!' # => true
 
 queue.length # => 1
 
 # shortly after... higher priority score is rejected
-queue.enqueue value: 'hello!' # => false
+queue.enqueue 'hello!' # => false
 
 queue.length # => 1
 
@@ -59,11 +59,11 @@ queue.dequeue # => { :priority => 1411405014, :value => "hello!" }
 queue.length # => 0
 
 # optionally set your own priority value
-queue.enqueue value: 'hello!', priority: 155 # => true
+queue.enqueue 'hello!', priority: 155 # => true
 
 # fetch all without dequeuing
-queue.enqueue value: 'hello!'
-queue.enqueue value: 'adding values!'
+queue.enqueue 'hello!'
+queue.enqueue 'adding values!'
 queue.all # [{:value=>"hello", :priority=>1411445996}, {:value=>"adding values!", :priority=>1411446073}]
 
 # clear out queue

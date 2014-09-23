@@ -77,7 +77,7 @@ module Punchline
       end
 
       it 'returns elements as hashes' do
-        subject.enqueue priority: 123, value: 'hello'
+        subject.enqueue 'hello', priority: 123
 
         hash = subject.all.first
         expect(hash).not_to be_nil
@@ -91,7 +91,7 @@ module Punchline
 
       it 'increases the length by 1' do
         expect {
-          subject.enqueue value: 'hello'
+          subject.enqueue 'hello'
         }.to change {
           subject.length
         }.by 1
@@ -103,26 +103,26 @@ module Punchline
       end
 
       it 'returns false when key is not written' do
-        result = subject.enqueue priority: 123, value: 'hello'
-        result = subject.enqueue priority: 456, value: 'hello'
+        result = subject.enqueue 'hello', priority: 123
+        result = subject.enqueue 'hello', priority: 456
         expect(result).to eq false
       end
 
       describe 'duplicates' do
         it 'ignores duplicate values' do
-          subject.enqueue priority: 123, value: 'hello'
+          subject.enqueue 'hello', priority: 123
 
           expect {
-            subject.enqueue priority: 567, value: 'hello'
+            subject.enqueue 'hello', priority: 567
           }.to change {
             subject.length
           }.by(0)
         end
 
         it 'retains only the lowest priority score' do
-          subject.enqueue priority: 123, value: 'hello'
-          subject.enqueue priority: 567, value: 'hello'
-          subject.enqueue priority: 25, value: 'hello'
+          subject.enqueue 'hello', priority: 123
+          subject.enqueue 'hello', priority: 567
+          subject.enqueue 'hello', priority: 25
 
           pair = subject.dequeue
           expect(pair[:priority]).to eq 25
@@ -134,13 +134,13 @@ module Punchline
 
         it 'keeps the oldest value for a given key' do
           original_time = Time.now.to_i
-          subject.enqueue value: 'hello'
+          subject.enqueue 'hello'
 
           Timecop.travel Time.now + 1000
-          subject.enqueue value: 'hello'
+          subject.enqueue 'hello'
 
           Timecop.travel Time.now + 1000
-          subject.enqueue value: 'hello'
+          subject.enqueue 'hello'
 
           result = subject.dequeue
           expect(result[:priority]).to eq original_time
@@ -152,14 +152,14 @@ module Punchline
       it { should respond_to :dequeue }
 
       it 'decreases the length by 1' do
-        subject.enqueue priority: 123, value: 'hello'
+        subject.enqueue 'hello', priority: 123
 
         expect{ subject.dequeue }.to change { subject.length }.by -1
       end
 
       it 'returns the pair with the lowest score' do
-        subject.enqueue priority: 123, value: 'hello'
-        subject.enqueue priority: 567, value: 'world'
+        subject.enqueue 'hello', priority: 123
+        subject.enqueue 'world', priority: 567
         expect(subject.dequeue).to eq({ value: 'hello', priority: 123 })
       end
     end
@@ -173,7 +173,7 @@ module Punchline
       end
 
       it 'resets the length' do
-        subject.enqueue priority: 123, value: 'hello'
+        subject.enqueue 'hello', priority: 123
         expect { subject.clear! }.to change { subject.length }.by -1
       end
     end
