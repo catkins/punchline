@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/catkins/mindy.svg)](https://travis-ci.org/catkins/mindy) [![Dependency Status](https://gemnasium.com/catkins/mindy.svg)](https://gemnasium.com/catkins/mindy) [![Coverage Status](https://img.shields.io/coveralls/catkins/mindy.svg)](https://coveralls.io/r/catkins/mindy)
+[![Build Status](https://travis-ci.org/catkins/punchline.svg)](https://travis-ci.org/catkins/punchline) [![Dependency Status](https://gemnasium.com/catkins/punchline.svg)](https://gemnasium.com/catkins/punchline) [![Coverage Status](https://img.shields.io/coveralls/catkins/punchline.svg)](https://coveralls.io/r/catkins/punchline)
 
 # Punchline
 
@@ -19,7 +19,7 @@ Currently tested against Ruby 2.0.0, 2.1.0 and JRuby
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'punchline', github: 'catkins/mindy'
+gem 'punchline', github: 'catkins/punchline'
 ```
 
 And then execute:
@@ -33,7 +33,7 @@ $ bundle
 ```ruby
 require 'punchline'
 
-# optionally override Mindy with your own Redis client, otherwise defaults to Redis.new
+# optionally override Punchline with your own Redis client, otherwise defaults to Redis.new
 Punchline.config.redis = Redis.new host: "10.0.1.1", port: 6830
 
 # create a queue
@@ -64,7 +64,7 @@ queue.length # => 0
 
 ## Contributing
 
-1. Fork it ( http://github.com/catkins/mindy/fork )
+1. Fork it ( http://github.com/catkins/punchline/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
