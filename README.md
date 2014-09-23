@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/catkins/punchline.svg)](https://travis-ci.org/catkins/punchline) [![Dependency Status](https://gemnasium.com/catkins/punchline.svg)](https://gemnasium.com/catkins/punchline) [![Coverage Status](https://img.shields.io/coveralls/catkins/punchline.svg)](https://coveralls.io/r/catkins/punchline) [![Code Climate](https://codeclimate.com/github/catkins/punchline/badges/gpa.svg)](https://codeclimate.com/github/catkins/punchline)
+[![Build Status](https://travis-ci.org/catkins/punchline.svg)](https://travis-ci.org/catkins/punchline) [![Dependency Status](https://gemnasium.com/catkins/punchline.svg)](https://gemnasium.com/catkins/punchline) [![Coverage Status](https://img.shields.io/coveralls/catkins/punchline.svg)](https://coveralls.io/r/catkins/punchline) [![Code Climate](https://codeclimate.com/github/catkins/punchline/badges/gpa.svg)](https://codeclimate.com/github/catkins/punchline) [![Gem Version](https://badge.fury.io/rb/punchline.svg)](http://badge.fury.io/rb/punchline)
 
 # Punchline
 
