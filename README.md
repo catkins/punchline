@@ -55,11 +55,11 @@ queue.length # => 1
 # original key is retrieved
 queue.dequeue # => { :priority => 1411405014, :value => "hello!" }
 
-# optionally set your own priority value
-queue.enqueue value: 'hello!', priority: 155 # => true
-
 # queue is now empty
 queue.length # => 0
+
+# optionally set your own priority value
+queue.enqueue value: 'hello!', priority: 155 # => true
 
 # fetch all without dequeuing
 queue.enqueue value: 'hello!'
