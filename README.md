@@ -46,7 +46,7 @@ end
 queue = Punchline::MinQueue.new :awesome_key
 queue.length # => 0
 
-# add a key
+# add a key - priority defaults to current timestamp (Time.now.to_i)
 queue.enqueue 'hello!' # => true
 
 queue.length # => 1
@@ -68,7 +68,7 @@ queue.enqueue 'hello!', priority: 155 # => true
 # fetch all without dequeuing
 queue.enqueue 'hello!'
 queue.enqueue 'adding values!'
-queue.all # [{:value=>"hello", :priority=>1411445996}, {:value=>"adding values!", :priority=>1411446073}]
+queue.all # [{:value=>"hello!", :priority=>1411445996}, {:value=>"adding values!", :priority=>1411446073}]
 
 # clear out queue
 queue.clear!
