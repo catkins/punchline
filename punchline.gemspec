@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'mindy/version'
+require 'punchline/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'mindy'
-  spec.version       = Mindy::VERSION
+  spec.name          = 'punchline'
+  spec.version       = Punchline::VERSION
   spec.authors       = ['Chris Atkins']
   spec.email         = ['christopherlionelatkins@gmail.com']
   spec.summary       = %q{Persistent redis based min-priority queue}
   spec.description   = %q{Persistent redis based min-priority queue.}
-  spec.homepage      = 'http://github.com/catkins/mindy'
+  spec.homepage      = 'http://github.com/catkins/punchline'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Mindy
+module Punchline
   describe MinQueue do
 
     let(:some_key) { 'some:key' }

@@ -1,6 +1,6 @@
 # Encoding: utf-8
 
-module Mindy
+module Punchline
   class MinQueue
 
     attr_accessor :key
@@ -11,7 +11,7 @@ module Mindy
     end
 
     def config
-      @config ||= Mindy.config.dup
+      @config ||= Punchline.config.dup
     end
 
     def length

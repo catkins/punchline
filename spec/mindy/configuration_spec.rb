@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Mindy
+module Punchline
   describe Configuration do
     subject(:config) { Configuration.new }
 

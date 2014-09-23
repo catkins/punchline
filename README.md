@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/catkins/mindy.svg)](https://travis-ci.org/catkins/mindy) [![Dependency Status](https://gemnasium.com/catkins/mindy.svg)](https://gemnasium.com/catkins/mindy) [![Coverage Status](https://img.shields.io/coveralls/catkins/mindy.svg)](https://coveralls.io/r/catkins/mindy)
 
-# Mindy
+# Punchline
 
-Mindy is a Redis backed Minimum Priority Queue with enforced uniqueness and atomicity fuelled by lua scripts.
+Punchline is a Redis backed Minimum Priority Queue with enforced uniqueness and atomicity fuelled by lua scripts.
 
 ## Motivation
 
@@ -19,7 +19,7 @@ Currently tested against Ruby 2.0.0, 2.1.0 and JRuby
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mindy', github: 'catkins/mindy'
+gem 'punchline', github: 'catkins/mindy'
 ```
 
 And then execute:
@@ -31,13 +31,13 @@ $ bundle
 ## Usage
 
 ```ruby
-require 'mindy'
+require 'punchline'
 
-# optionally override Mindy a Redis client, otherwise defaults to Redis.new
-Mindy.config.redis = Redis.new host: "10.0.1.1", port: 6830
+# optionally override Mindy with your own Redis client, otherwise defaults to Redis.new
+Punchline.config.redis = Redis.new host: "10.0.1.1", port: 6830
 
 # create a queue
-queue = Mindy::MinQueue.new
+queue = Punchline::MinQueue.new
 queue.length # => 0
 
 # add a key
