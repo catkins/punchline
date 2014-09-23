@@ -19,13 +19,13 @@ Currently tested against Ruby 2.0.0, 2.1.0 and JRuby
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'punchline', github: 'catkins/punchline'
+gem 'punchline', '~> 0.1.0'
 ```
 
 And then execute:
 
 ```bash
-$ bundle
+$ bundle install
 ```
 
 ## Usage
@@ -76,11 +76,6 @@ queue.all # => []
 queue.length # => 0
 
 ```
-
-## TODO
-
-- Come up with a gem name that isn't taken...
-- Push to rubygems
 
 ## Contributing
 
