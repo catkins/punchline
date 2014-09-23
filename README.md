@@ -43,7 +43,7 @@ Punchline.configure do |config|
 end
 
 # create a queue
-queue = Punchline::MinQueue.new
+queue = Punchline::MinQueue.new :awesome_key
 queue.length # => 0
 
 # add a key
