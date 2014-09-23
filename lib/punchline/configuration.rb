@@ -1,6 +1,8 @@
+# Encoding: utf-8
+
 require 'redis'
 
-module Mindy
+module Punchline
   class Configuration
     attr_accessor :redis
 

@@ -2,4 +2,4 @@ require 'coveralls'
 Coveralls.wear!
 
 require 'pry'
-require 'mindy'
+require 'punchline'
