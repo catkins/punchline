@@ -33,9 +33,13 @@ $ bundle
 ```ruby
 require 'punchline'
 
-# optionally override Punchline with your own Redis client, otherwise defaults to Redis.new
+# optionally override Punchline with your own Redis client, eg. Redis::Namespace
+redis_url = ENV["REDIS_URL"] || "redis://localhost:6379"
+client = Redis.new url: redis_url
+namespaced_client = Redis::Namespace.new Rails.env, client
+
 Punchline.configure do |config|
-  config.redis = Redis.new host: "10.0.1.1", port: 6830
+  config.redis = namespaced_client
 end
 
 # create a queue
@@ -75,7 +79,6 @@ queue.length # => 0
 
 ## TODO
 
-- Add support for Redis::Namespace
 - Come up with a gem name that isn't taken...
 - Push to rubygems
 
