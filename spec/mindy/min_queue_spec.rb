@@ -6,6 +6,10 @@ module Mindy
     let(:some_key) { 'some:key' }
     subject(:min_queue) { MinQueue.new some_key }
 
+    before(:each) do
+      subject.clear!
+    end
+
     it { should_not be_nil }
     it { should respond_to :config }
 
@@ -51,10 +55,32 @@ module Mindy
       end
     end
 
+    describe '#all' do
+      it { should respond_to :all }
+
+      it 'delegates to reading redis range' do
+        subject.redis.stub(:zrange) { [] }
+        expect(subject.redis).to receive(:zrange).with(some_key, 0, -1, with_scores: true)
+        subject.all
+      end
+
+      it 'returns an array' do
+        expect(subject.all).to be_kind_of Array
+      end
+
+      it 'returns elements as hashes' do
+        subject.enqueue priority: 123, value: 'hello'
+
+        hash = subject.all.first
+        expect(hash).not_to be_nil
+        expect(hash[:priority]).to eq 123
+        expect(hash[:value]).to eq 'hello'
+      end
+    end
+
     describe '#enqueue' do
       after(:each) do
         subject.reset_scripts!
-        subject.clear!
       end
 
       it { should respond_to :enqueue }

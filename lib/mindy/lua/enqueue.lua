@@ -7,14 +7,14 @@ local current_score = tonumber(redis.call("ZSCORE", key, value))
 -- first time key has been added
 if current_score == nil then
   redis.call("ZADD", key, priority, value)
-  return 1
+  return true
 end
 
 -- only add if it's a lower priority
 if priority < current_score then
   redis.call("ZADD", key, priority, value)
-  return 1
+  return true
 end
 
-return 0
+return false
 

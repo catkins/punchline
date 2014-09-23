@@ -18,6 +18,12 @@ module Mindy
       redis.zcard key
     end
 
+    def all
+      redis.zrange(key, 0, -1, with_scores: true).map do |pair|
+        { value: pair.first, priority: pair.last.to_i }
+      end
+    end
+
     def enqueue(options = {})
       priority = options.fetch :priority
       value    = options.fetch :value
