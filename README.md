@@ -34,24 +34,44 @@ $ bundle
 require 'punchline'
 
 # optionally override Punchline with your own Redis client, otherwise defaults to Redis.new
-Punchline.config.redis = Redis.new host: "10.0.1.1", port: 6830
+Punchline.configure do |config|
+  config.redis = Redis.new host: "10.0.1.1", port: 6830
+end
 
 # create a queue
 queue = Punchline::MinQueue.new
 queue.length # => 0
 
 # add a key
-queue.enqueue priority: Time.now.to_i, value: 'hello!' # => true
+queue.enqueue value: 'hello!' # => true
+
 queue.length # => 1
 
 # shortly after... higher priority score is rejected
-queue.enqueue priority: Time.now.to_i, value: 'hello!' # => false
+queue.enqueue value: 'hello!' # => false
+
 queue.length # => 1
 
 # original key is retrieved
 queue.dequeue # => { :priority => 1411405014, :value => "hello!" }
 
+# original key is retrieved
+queue.dequeue # => { :priority => 1411405014, :value => "hello!" }
+
+# optionally set your own priority value
+queue.enqueue value: 'hello!', priority: 155 # => true
+
 # queue is now empty
+queue.length # => 0
+
+# fetch all without dequeuing
+queue.enqueue value: 'hello!'
+queue.enqueue value: 'adding values!'
+queue.all # [{:value=>"hello", :priority=>1411445996}, {:value=>"adding values!", :priority=>1411446073}]
+
+# clear out queue
+queue.clear!
+queue.all # => []
 queue.length # => 0
 
 ```
