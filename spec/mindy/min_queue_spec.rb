@@ -151,5 +151,19 @@ module Punchline
         expect(subject.dequeue).to eq({ value: 'hello', priority: 123 })
       end
     end
+
+    describe '#clear!' do
+      it { should respond_to :clear! }
+
+      it 'deletes the key on redis' do
+        expect(subject.redis).to receive(:del).with(some_key)
+        subject.clear!
+      end
+
+      it 'resets the length' do
+        subject.enqueue priority: 123, value: 'hello'
+        expect { subject.clear! }.to change { subject.length }.by -1
+      end
+    end
   end
 end
