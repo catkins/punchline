@@ -20,6 +20,13 @@ Add this line to your application's Gemfile:
 
 ```ruby
 gem 'punchline', '~> 0.1.0'
+
+```
+
+Or live on the bleeding edge
+
+```
+gem 'punchline', github: 'catkins/punchline'
 ```
 
 And then execute:
