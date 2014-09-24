@@ -39,10 +39,6 @@ module Punchline
       config.redis
     end
 
-    def load_scripts!
-      @enqueue = Script.new redis, 'enqueue.lua'
-      @dequeue = Script.new redis, 'dequeue.lua'
-    end
 
     def clear!
       redis.del key
@@ -52,6 +48,12 @@ module Punchline
       redis.script :flush
     end
 
+    private
+
+    def load_scripts!
+      @enqueue = Script.new redis, 'enqueue.lua'
+      @dequeue = Script.new redis, 'dequeue.lua'
+    end
 
     class Script
       SCRIPT_BASE_PATH = File.expand_path('../lua', __FILE__)
