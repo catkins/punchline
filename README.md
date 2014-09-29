@@ -75,7 +75,7 @@ queue.enqueue 'hello!', priority: 155 # => true
 # fetch all without dequeuing
 queue.enqueue 'hello!'
 queue.enqueue 'adding values!'
-queue.all # [{:value=>"hello!", :priority=>1411445996}, {:value=>"adding values!", :priority=>1411446073}]
+queue.all # [{:value=>"hello!", :priority=>155}, {:value=>"adding values!", :priority=>1411446073}]
 
 # clear out queue
 queue.clear!
